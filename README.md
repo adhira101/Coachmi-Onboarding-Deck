@@ -1,6 +1,12 @@
-# Onboarding Deck
+# Coachmi Onboarding Deck
 
-A modern web-based presentation deck built using HTML, CSS, and JavaScript.
+Interactive onboarding presentation for Coachmi platform.
+
+## Deployment
+
+This site is deployed using GitHub Pages and can be accessed at: https://adhira101.github.io/Coachmi-Onboarding-Deck/
+
+Last updated: December 19, 2024
 
 ## Features
 - Responsive design
