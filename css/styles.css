@@ -1,0 +1,1298 @@
+:root {
+    --accent-color: #22c55e;
+    --accent-light: #ecfdf5;
+    --text-color: #1e293b;
+    --text-light: #64748b;
+    --text-secondary: #64748b;
+    --card-bg: #ffffff;
+    --card-border: #e2e8f0;
+    --bg-gradient: #ffffff;
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --mint-bg: #ecfdf5;
+    --text-primary: #1e293b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background: var(--bg-gradient);
+    min-height: 100vh;
+}
+
+.deck {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: var(--spacing-xl);
+    background: var(--bg-gradient);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    display: none;
+}
+
+.slide.active {
+    opacity: 1;
+    z-index: 1;
+    display: block;
+}
+
+.content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-xl) var(--spacing-lg);
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--text-color);
+    text-align: left;
+    margin-bottom: var(--spacing-xl);
+    position: relative;
+    padding-bottom: var(--spacing-md);
+}
+
+h1::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--mint-bg);
+    border-radius: 2px;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 40px;
+    height: 4px;
+    background: var(--accent-color);
+    border-radius: 2px;
+    transition: width 0.5s ease-in-out;
+}
+
+/* Progress width for each slide */
+.slide-1 h1::after {
+    width: calc(100% * (1/7));
+}
+
+.slide-2 h1::after {
+    width: calc(100% * (2/7));
+}
+
+.slide-3 h1::after {
+    width: calc(100% * (3/7));
+}
+
+.slide-4 h1::after {
+    width: calc(100% * (4/7));
+}
+
+.slide-5 h1::after {
+    width: calc(100% * (5/7));
+}
+
+.slide-6 h1::after {
+    width: calc(100% * (6/7));
+}
+
+.slide-7 h1::after {
+    width: 100%;
+}
+
+/* Add transition for slide changes */
+.slide h1::after {
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+h2::before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 20px;
+    background: var(--accent-color);
+    border-radius: 2px;
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+}
+
+.left-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.section {
+    margin-bottom: var(--spacing-md);
+}
+
+/* Common Card Styles */
+.feature-card,
+.benefit-pill,
+.step-card {
+    background: var(--mint-bg);
+    border-radius: 8px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    transition: all 0.2s ease;
+}
+
+.feature-card .icon,
+.benefit-pill .icon,
+.step-card .icon {
+    font-size: 22px;
+    color: var(--accent-color);
+}
+
+.feature-card h3,
+.benefit-pill h3,
+.step-card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.feature-card p,
+.benefit-pill p,
+.step-card p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Steps Container Standardization */
+.slide-5 .steps-container,
+.slide-6 .steps-container,
+.slide-7 .steps-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    padding: var(--spacing-sm);
+}
+
+/* Step Cards Standardization */
+.slide-5 .step-card,
+.slide-6 .step-card,
+.slide-7 .step-card {
+    background: var(--mint-bg);
+    border-radius: 8px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-left: 4px solid var(--accent-color);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    transition: all 0.2s ease;
+}
+
+.slide-5 .step-card .step-number,
+.slide-6 .step-card .step-number,
+.slide-7 .step-card .step-number {
+    width: 28px;
+    height: 28px;
+    background: var(--accent-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.slide-5 .step-card .content,
+.slide-6 .step-card .content,
+.slide-7 .step-card .content {
+    flex-grow: 1;
+}
+
+.slide-5 .step-card:hover,
+.slide-6 .step-card:hover,
+.slide-7 .step-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+    .slide-5 .steps-container,
+    .slide-6 .steps-container,
+    .slide-7 .steps-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .slide-5 .steps-container,
+    .slide-6 .steps-container,
+    .slide-7 .steps-container {
+        grid-template-columns: 1fr;
+    }
+
+    .slide-5 .step-card,
+    .slide-6 .step-card,
+    .slide-7 .step-card {
+        min-height: auto;
+    }
+}
+
+/* Features Section */
+.feature-card {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--accent-light);
+    border-radius: 8px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.feature-card:last-child {
+    margin-bottom: 0;
+}
+
+.feature-card .icon {
+    font-size: 22px;
+    color: var(--accent-color);
+}
+
+.feature-card .text p {
+    font-size: 15px;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+/* Benefits Section */
+.benefits-section {
+    margin: var(--spacing-md) 0;
+}
+
+.benefits-section .benefit-pills {
+    display: inline-flex;
+    flex-direction: row;
+    gap: var(--spacing-md);
+    width: 100%;
+}
+
+.benefit-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 8px var(--spacing-lg);
+    background: white;
+    border-radius: 100px;
+    border: 1px solid var(--card-border);
+    flex: 0 0 auto;
+    transition: all 0.2s ease;
+}
+
+.benefit-pill:hover {
+    border-color: var(--accent-color);
+    background: var(--accent-light);
+    transform: translateY(-2px);
+}
+
+.benefit-pill .icon {
+    font-size: 20px;
+    color: var(--accent-color);
+}
+
+.benefit-pill .text {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-color);
+    white-space: nowrap;
+}
+
+/* Steps Section */
+.steps-container {
+    display: flex;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-sm);
+}
+
+.step-card {
+    flex: 1;
+    background: linear-gradient(135deg, #ffffff 0%, var(--accent-light) 50%, #ffffff 100%);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-left: 4px solid var(--accent-color);
+    border-radius: 16px;
+    padding: var(--spacing-lg);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08),
+                0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.step-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(225deg, 
+        rgba(var(--accent-rgb), 0.12) 0%,
+        rgba(var(--accent-rgb), 0.05) 25%,
+        rgba(var(--accent-rgb), 0) 100%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.step-card:hover {
+    transform: translateY(-4px) translateX(4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-color: var(--accent-color);
+}
+
+.step-card:hover::before {
+    opacity: 1;
+}
+
+.step-card .step-number {
+    background: linear-gradient(135deg, var(--accent-color) 0%, #34d399 100%);
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: var(--spacing-md);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.step-card:hover .step-number {
+    transform: scale(1.15) translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.step-card .icon {
+    font-size: 28px;
+    margin: var(--spacing-md) 0;
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.step-card:hover .icon {
+    transform: scale(1.2) rotate(-5deg);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.step-card h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: var(--spacing-sm) 0;
+    color: var(--text-color);
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.step-card:hover h3 {
+    transform: translateX(6px);
+    color: var(--accent-color);
+}
+
+.step-card p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+    line-height: 1.5;
+}
+
+.step-card:hover p {
+    transform: translateX(6px);
+}
+
+/* Mobile Screen */
+.mobile-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: var(--spacing-xl);
+}
+
+.mobile-screen {
+    height: 100%;
+    background: #ffffff;
+    border-radius: 35px;
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.app-header {
+    text-align: center;
+    font-weight: 600;
+    color: var(--text-color);
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--card-border);
+}
+
+.form-preview {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.form-field {
+    height: 48px;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--card-border);
+}
+
+.button-preview {
+    height: 48px;
+    background: var(--accent-color);
+    border-radius: 12px;
+    margin-top: var(--spacing-sm);
+}
+
+/* Mobile Screen Placeholder */
+.mobile-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-xl);
+}
+
+.image-upload-placeholder {
+    width: 280px;
+    height: 560px;
+    border: 12px solid #1a1a1a;
+    border-radius: 40px;
+    background: white;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 0 2px #333;
+}
+
+.phone-notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 25px;
+    background: #1a1a1a;
+    border-radius: 0 0 15px 15px;
+    z-index: 2;
+}
+
+.status-bar {
+    height: 44px;
+    padding: 0 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #1a1a1a;
+    background: white;
+    position: relative;
+    z-index: 1;
+}
+
+.status-icons {
+    display: flex;
+    gap: 4px;
+    font-size: 12px;
+}
+
+.phone-content {
+    position: relative;
+    height: calc(100% - 44px);
+    background: #f5f5f5;
+    border: 2px dashed var(--card-border);
+    margin: 8px;
+    border-radius: 8px;
+}
+
+/* Add power and volume buttons */
+.image-upload-placeholder::before {
+    content: '';
+    position: absolute;
+    right: -14px;
+    top: 100px;
+    width: 2px;
+    height: 60px;
+    background: #333;
+    border-radius: 2px;
+}
+
+.image-upload-placeholder::after {
+    content: '';
+    position: absolute;
+    left: -14px;
+    top: 80px;
+    width: 2px;
+    height: 40px;
+    background: #333;
+    border-radius: 2px;
+}
+
+/* Navigation Arrows */
+.slide-navigation {
+    position: fixed;
+    bottom: 40px;
+    width: 100%;
+    padding: 0 40px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+.nav-arrow {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background: var(--accent-color);
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-arrow:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+}
+
+.nav-arrow:active {
+    transform: scale(0.95);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Slide 3 Specific Styles */
+.slide-3 {
+    position: relative;
+    overflow: hidden;
+}
+
+.slide-3::before {
+    content: '📅 👥 ⏰';
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0.05;
+    font-size: 120px;
+    transform: rotate(-15deg) translate(20%, -20%);
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.slide-3 .content-wrapper {
+    position: relative;
+}
+
+.slide-3 h1 {
+    position: relative;
+    display: inline-block;
+    margin-bottom: var(--spacing-xl);
+}
+
+.slide-3 h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-color) 0%, transparent 100%);
+    border-radius: 2px;
+}
+
+.slide-3 .steps-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    padding: var(--spacing-sm);
+}
+
+.slide-3 .step-card {
+    margin-bottom: var(--spacing-md);
+}
+
+/* Mobile screen content for slide 3 */
+.slide-3 .mobile-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: var(--spacing-xl);
+}
+
+.slide-3 .image-upload-placeholder {
+    width: 300px;
+    height: 600px;
+    background: white;
+    border: 12px solid #1a1a1a;
+    border-radius: 40px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.slide-3 .phone-notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 25px;
+    background: #1a1a1a;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    z-index: 2;
+}
+
+.slide-3 .status-bar {
+    height: 44px;
+    padding: 0 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #1a1a1a;
+    background: white;
+    position: relative;
+    z-index: 1;
+}
+
+.slide-3 .phone-content {
+    height: calc(100% - 44px);
+    background: var(--mint-bg);
+    padding: var(--spacing-lg);
+}
+
+/* Remove old mobile screen styles */
+.slide-3 .mobile-screen {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .slide-3 .steps-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Slide 4 Specific Styles */
+.slide-4 {
+    position: relative;
+    overflow: hidden;
+}
+
+.slide-4::before {
+    content: '👥 👨‍🏫 📋';
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0.05;
+    font-size: 120px;
+    transform: rotate(-15deg) translate(20%, -20%);
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.slide-4 .content-wrapper {
+    position: relative;
+}
+
+.slide-4 h1 {
+    position: relative;
+    display: inline-block;
+    margin-bottom: var(--spacing-xl);
+}
+
+.slide-4 h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-color) 0%, transparent 100%);
+    border-radius: 2px;
+}
+
+.slide-4 .mobile-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: var(--spacing-xl);
+}
+
+.slide-4 .image-upload-placeholder {
+    width: 300px;
+    height: 600px;
+    background: white;
+    border: 12px solid #1a1a1a;
+    border-radius: 40px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.slide-4 .phone-notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 25px;
+    background: #1a1a1a;
+    border-radius: 0 0 15px 15px;
+    z-index: 2;
+}
+
+.slide-4 .status-bar {
+    height: 44px;
+    padding: 0 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #1a1a1a;
+    background: white;
+    position: relative;
+    z-index: 1;
+}
+
+.slide-4 .phone-content {
+    height: calc(100% - 44px);
+    background: var(--mint-bg);
+    padding: var(--spacing-lg);
+}
+
+/* Remove old split screen styles */
+.slide-4 .split-screen,
+.slide-4 .mobile-screen {
+    display: none;
+}
+
+.slide-4 .split-screen {
+    display: flex;
+    gap: var(--spacing-lg);
+    height: 100%;
+}
+
+.slide-4 .mobile-screen {
+    flex: 1;
+    max-width: 280px;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.slide-4 .mobile-screen:hover {
+    transform: scale(0.95);
+}
+
+.slide-4 .mobile-screen .content {
+    background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
+    min-height: 400px;
+}
+
+.slide-4 .mobile-screen .content.students {
+    border-left: 4px solid var(--accent-color);
+}
+
+.slide-4 .mobile-screen .content.coaches {
+    border-left: 4px solid #3b82f6;
+}
+
+.slide-4 .steps-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    padding: var(--spacing-sm);
+}
+
+@media (max-width: 1200px) {
+    .slide-4 .split-screen {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .slide-4 .mobile-screen {
+        transform: scale(0.8);
+    }
+}
+
+@media (max-width: 768px) {
+    .slide-4 .steps-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Slide 5 Specific Styles */
+.slide-5 {
+    position: relative;
+}
+
+.slide-5 .content-wrapper {
+    padding: var(--spacing-xl) var(--spacing-lg);
+}
+
+.slide-5 .main-content {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: var(--spacing-xl);
+}
+
+.slide-5 .section {
+    margin-bottom: var(--spacing-md);
+}
+
+.slide-5 h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-color);
+}
+
+/* Feature cards */
+.slide-5 .feature-card {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--mint-bg);
+    border-radius: 8px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.slide-5 .feature-card .icon {
+    font-size: 20px;
+    color: var(--accent-color);
+}
+
+.slide-5 .feature-card .text p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--text-color);
+}
+
+/* Benefits pills */
+.slide-5 .benefit-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+.slide-5 .benefit-pill {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 6px var(--spacing-md);
+    background: var(--mint-bg);
+    border-radius: 16px;
+    font-size: 13px;
+}
+
+.slide-5 .benefit-pill .icon {
+    font-size: 16px;
+    color: var(--accent-color);
+}
+
+.slide-5 .benefit-pill .text {
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+/* Steps section */
+.slide-5 .steps-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-sm);
+}
+
+.slide-5 .step-card {
+    background: var(--mint-bg);
+    border-radius: 8px;
+    padding: var(--spacing-sm);
+    border-left: 3px solid var(--accent-color);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 120px;
+}
+
+.slide-5 .step-card .step-number {
+    width: 20px;
+    height: 20px;
+    background: var(--accent-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.slide-5 .step-card .icon {
+    font-size: 16px;
+    color: var(--accent-color);
+}
+
+.slide-5 .step-card h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.slide-5 .step-card p {
+    font-size: 12px;
+    color: var(--text-light);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Mobile frame */
+.slide-5 .mobile-holder {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.slide-5 .mobile-frame {
+    width: 280px;
+    height: 560px;
+    background: white;
+    border: 12px solid #1a1a1a;
+    border-radius: 40px;
+    overflow: hidden;
+    position: relative;
+}
+
+.slide-5 .notch {
+    width: 120px;
+    height: 24px;
+    background: #1a1a1a;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    z-index: 2;
+}
+
+.slide-5 .screen-content {
+    height: 100%;
+    background: var(--mint-bg);
+    padding: var(--spacing-sm);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .slide-5 .main-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+    
+    .slide-5 .mobile-holder {
+        margin-top: var(--spacing-xl);
+    }
+}
+
+@media (max-width: 768px) {
+    .slide-5 .steps-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .slide-5 .step-card {
+        min-height: auto;
+    }
+    
+    .slide-5 .benefit-pills {
+        flex-direction: column;
+    }
+    
+    .slide-5 .benefit-pill {
+        width: 100%;
+    }
+}
+
+/* Slide 6 Specific Styles */
+.slide-6 {
+    position: relative;
+}
+
+/* Slide 7 Specific Styles */
+.slide-7 {
+    position: relative;
+}
+
+.slide-7 .content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-xl) var(--spacing-lg);
+}
+
+.slide-7 .main-content {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+}
+
+.slide-7 .left-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.slide-7 .section {
+    margin-bottom: var(--spacing-xl);
+}
+
+/* Feature cards for slide 7 */
+.slide-7 .feature-card {
+    background: var(--mint-bg);
+    border-radius: 8px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    transition: all 0.2s ease;
+}
+
+.slide-7 .feature-card .icon {
+    font-size: 22px;
+    color: var(--accent-color);
+}
+
+.slide-7 .feature-card .text p {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Steps container for slide 7 */
+.slide-7 .steps-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+}
+
+.slide-7 .step-card {
+    background: var(--mint-bg);
+    border-radius: 8px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-left: 4px solid var(--accent-color);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    transition: all 0.2s ease;
+}
+
+/* Mobile frame for slide 7 */
+.slide-7 .right-section {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: var(--spacing-xl);
+}
+
+.slide-7 .mobile-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.slide-7 .image-upload-placeholder {
+    width: 280px;
+    height: 560px;
+    background: white;
+    border: 12px solid #1a1a1a;
+    border-radius: 40px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.slide-7 .phone-notch {
+    width: 120px;
+    height: 24px;
+    background: #1a1a1a;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    z-index: 2;
+}
+
+.slide-7 .status-bar {
+    width: 100%;
+    height: 44px;
+    background: var(--mint-bg);
+    padding: 0 var(--spacing-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: var(--text-primary);
+}
+
+.slide-7 .phone-content {
+    height: calc(100% - 44px);
+    background: var(--mint-bg);
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+/* Remove old batch details styles */
+.slide-7 .batch-details,
+.slide-7 .batch-header,
+.slide-7 .batch-info,
+.slide-7 .batch-stats,
+.slide-7 .stat-item,
+.slide-7 .activate-button,
+.slide-7 .primary-button {
+    display: none;
+}
+
+/* Update responsive styles */
+@media (max-width: 1024px) {
+    .slide-7 .main-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+
+    .slide-7 .left-section {
+        max-width: 100%;
+    }
+
+    .slide-7 .right-section {
+        padding-top: var(--spacing-xl);
+    }
+}
+
+@media (max-width: 768px) {
+    .slide-7 .steps-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Responsive styles for slides 5 and 7 */
+@media (max-width: 1024px) {
+    .slide-5 .main-content,
+    .slide-7 .main-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+
+    .slide-5 .left-section,
+    .slide-7 .left-section {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .slide-5 .steps-container,
+    .slide-7 .steps-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Consistent title styling for all slides */
+.slide-1 h1,
+.slide-2 h1,
+.slide-4 h1,
+.slide-5 h1,
+.slide-6 h1,
+.slide-7 h1 {
+    text-align: left;
+}
+
+.slide-1 h1::after,
+.slide-2 h1::after,
+.slide-4 h1::after,
+.slide-5 h1::after,
+.slide-6 h1::after,
+.slide-7 h1::after {
+    left: 0;
+    transform: none;
+}
